@@ -1,11 +1,9 @@
-const express = require('express')
-const app = express()
+var express = require('express')
+var app = express()
 app.use(express.static('nodeJS'));
 
 app.get('/', function(req, resp){
-    resp.statusCode = 200
-    resp.setHeader('Content-Type', 'text/plain');
-    resp.end("Hello World")
+    resp.send("Hello World")
     
 })
 
