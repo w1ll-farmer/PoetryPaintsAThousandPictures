@@ -1,11 +1,8 @@
-var express = require('express')
-var app = express()
-app.use(express.static('nodeJS'));
+const app = require('./app.js');
 
-app.get('/', function(req, resp){
-    resp.send("Hello World")
-    
-})
+const hostname = '127.0.0.1';
+const port = 8090;
 
-app.listen(8090)
-console.log('server running at http//127.0.0.1:8090/')
+app.listen(port, hostname, () => {
+    console.log('server running at http://',{hostname},':',{port});
+});
