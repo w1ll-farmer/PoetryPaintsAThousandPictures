@@ -1,4 +1,10 @@
 .large-text-box{
     height:20vh;
     width:30vw;
+    
+}
+#write-poem-form{
+    font-size:16pt;
+    float:left;
+    text-align:center
 }
