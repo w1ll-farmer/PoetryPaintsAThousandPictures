@@ -13,8 +13,7 @@
 h1{
     font-size:18pt;
     font-family:'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-    text-align:center;
-    color:#6610f2
+    text-align:center
 }
 
 .paragraph{
@@ -22,3 +21,9 @@ h1{
     text-align:center;
     font-size:14pt;
 }
+
+.img-container{
+    position:relative;
+    text-align:center
+}
+
