@@ -7,7 +7,6 @@ app.use(express.static(path.join(__dirname, 'client')));
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const fs = require('fs');
-/*ADAPTED FROM CHATGPT*/
 app.post('/save-json', (req, res) => {
   // Read the JSON data from the request body
   const jsonData = req.body;
@@ -15,6 +14,7 @@ app.post('/save-json', (req, res) => {
   data[jsonData.poem] = jsonData.author;
   // Set destination file
   const filePath = './poems.json';
+  /*ADAPTED FROM CHATGPT*/
   fs.readFile(filePath, 'utf8', (err, fileData) =>{
     //use of utf8 so string not buffer
     if (err) {
