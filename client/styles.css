@@ -3,7 +3,10 @@
     width:30vw;
     resize:none;
     font-size:12pt;
-    
+}
+
+textarea{
+    white-space: pre;
 }
 
 
