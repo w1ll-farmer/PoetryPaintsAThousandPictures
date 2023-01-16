@@ -8,6 +8,9 @@ function switchDiv(divClass) {
 
     for (var i = 0; i < elements.length; i++) {
         elements[i].classList.remove("hidden");
-}
+}}
 
-}
+window.addEventListener("DOMContentLoaded") = function() {
+    switchDiv('intro-page');
+};
+
