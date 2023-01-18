@@ -31,15 +31,23 @@
             <p style="clear:both"></p>
         </div>
     </div>
-    <div class="read-poem hidden">
+    <!--READ POEM-->
+    <div class="read-poem hidden" id="read-page" alt="background-image: beautiful forest-river scenery">
         <div style="color:#6610f2;" class="read-poem title">
             <img src="images/back-arrow.png" alt="Button taking to introduction page" style="width:50px;" onclick="switchDiv('intro-page')">
             <span style="text-align:center;">Read Poem</span>
         </div><br><br>
+        <div style="text-align:center" class="read-poem">
+            <button id="poem-gen" method="get">Generate Poem</button>
+            <br><br>
+            <div class="read-poem" id="poems"></div>
+        </div>
         
     </div>
+    <!--READ POEM END-->
 
-    <div class="write-poem hidden" style="background-image:url('/images/write-background.png');background-size:cover;background-repeat:no-repeat;" alt="background image: 'I want stars' by Noor Unnahar">
+    <!--WRITE POEM-->
+    <div class="write-poem hidden" id="write-page" alt="background image: 'I want stars' by Noor Unnahar">
         <div style="color:#6610f2;" class="write-poem title">
             <img src="images/back-arrow.png" alt="Button taking to introduction page" style="width:50px;" onclick="switchDiv('intro-page')">
             <span style="text-align:center;">Write Poem</span>
@@ -52,6 +60,7 @@
                 <br><br><br>
             </form>
          </div>
+         <!--WRITE POEM END-->
     </div>
 
 

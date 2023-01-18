@@ -1,14 +1,17 @@
 .large-text-box{
-    height:20vh;
-    width:30vw;
+    height:300px;
+    width:450px;
     resize:none;
     font-size:12pt;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 textarea{
     white-space: pre;
 }
-
+p {
+    white-space: pre;
+}
 
 #write-form{
     text-align:center;
@@ -51,3 +54,27 @@ h1{
     
 }
 
+#poem-gen {
+    background-color:rebeccapurple;
+    color:whitesmoke;
+    border-radius: 50%;
+    border-color:transparent;
+    width:200px;
+    height:150px;
+    position:relative;
+    z-index: 2;
+}
+
+#write-page{
+    background-image:url('/images/write-background.png');
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+#read-page{
+    background-image:url('/images/read-background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color:black;
+    z-index: 1;
+}

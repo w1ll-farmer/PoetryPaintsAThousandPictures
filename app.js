@@ -11,6 +11,7 @@ app.post('/save-json', (req, res) => {
   // Read the JSON data from the request body
   const jsonData = req.body;
   const data = {};
+  //poem is key author is value - each poem is unique. 
   data[jsonData.poem] = jsonData.author;
   // Set destination file
   const filePath = './poems.json';
@@ -39,6 +40,28 @@ app.post('/save-json', (req, res) => {
   })
   
   });
+
+app.get('/poems', (req, res) => {
+    // Read the file as a JSON object
+    fs.readFile('./poems.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        // Parse the JSON data
+        const poems = JSON.parse(data);
+        let newPoems ={}
+        let temp ={}
+        for (let poem in poems) {
+            let newPoem = poem.replace(/\\n/g, '\n');
+            temp[newPoem] = poems[poem];
+            Object.assign(newPoems,temp)
+        }
+        // Send the poems data as a JSON response
+        res.json(newPoems);
+    });
+});
+  
 
 
 
