@@ -9,9 +9,7 @@
 textarea{
     white-space: pre;
 }
-p {
-    white-space: pre;
-}
+
 
 #write-form{
     text-align:center;
@@ -28,9 +26,11 @@ h1{
 }
 
 .paragraph{
+    position:relative;
     font-family:Arial, Helvetica, sans-serif;
     text-align:center;
     font-size:14pt;
+    word-wrap: break-word;
 }
 
 .img-container{
