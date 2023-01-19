@@ -41,10 +41,11 @@ async function saveData() { //writes and saves data to JSON
         const poemDiv = document.getElementById("poems");
         const keys = Object.keys(poemDict);
         let randomPoem=previousPoem
-        while (randomPoem === previousPoem){
+        while (randomPoem == previousPoem){
             const randomIndex = Math.floor(Math.random() * keys.length);
             randomPoem = keys[randomIndex];
         }
+        previousPoem = randomPoem
         const author = poemDict[randomPoem];
         let poemNode = document.createElement("div");
         poemNode.setAttribute("id", "poem-node")
