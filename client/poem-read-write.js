@@ -1,29 +1,37 @@
-async function saveData() { //writes and saves data to JSON
-    // Assigns poem and author to variables
-    const poem = document.querySelector("textarea[name='poem']").value;
-    const author = document.querySelector("input[name='author']").value;
-  
-    // Create a data object to hold the form data
-    const data = { poem, author };
-  
-    // Convert the data object to a string using stringify()
-    const jsonData = JSON.stringify(data);
-    /*ADAPTED FROM PASTA PAGE*/
-    try { //allows for error catching
-      // Use the fetch() function to send a request to the server to save the JSON data to a file
-      const response = await fetch('/save-json', {
-        method: 'POST',
-        body: jsonData,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      const result = await response.json();
-      console.log('Success:', result);
-    } catch (error) {
-      console.error('Error:', error);
-    }
+async function saveData() {
+  // Assigns poem, author and title to variables
+  const poem = document.querySelector("textarea[name='poem']").value;
+  const author = document.querySelector("input[name='author']").value;
+  const title = document.querySelector("textarea[name='title']").value;
+
+  // Create a data object to hold the form data
+  const data = { 
+      author: author, 
+      title: title, 
+      poem: poem 
+  };
+
+  // Convert the data object to a string using stringify()
+  const jsonData = JSON.stringify(data);
+
+  try {
+    // Use the fetch() function to send a request to the server to save the JSON data to a file
+    const response = await fetch('/save-json', {
+      method: 'POST',
+      body: jsonData,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const result = await response.json();
+    console.log('Success:', result);
+  } catch (error) {
+    console.error('Error:', error);
   }
+}
+
+
+
   
   const form = document.querySelector("#write-form");
   form.addEventListener("submit", x => {

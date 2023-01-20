@@ -11,7 +11,7 @@ function switchDiv(divClass) { //switches 'visible' divs
 }}
 //makes it so intro-page is the only div shown when DOM content
 //has loaded
-window.addEventListener("DOMContentLoaded") = function() {
+window.addEventListener("DOMContentLoaded", function() {
     switchDiv('intro-page');
-};
+});
 

@@ -32,11 +32,7 @@
             <img src="images/read-poem.png" style="max-width:40%" onclick="switchDiv('read-poem')" alt="Button allowing user to read poems">
             <p style="clear:both"></p>
         </div>
-        <footer class="pt-5 my-5 text-muted border-top" class="intro-page">
-            <div class="container text-center">
-                <p class="intro-page">Created by Will Farmer &middot;</p>
-            </div>
-        </footer>
+        
     </div>
     <!--READ POEM-->
     <div class="read-poem hidden" id="read-page">
@@ -61,6 +57,7 @@
         </div><br><br>
         <div style="text-align:center" class="write-poem">
             <form id="write-form" method="post">
+                <p>Enter Title Here<br><textarea name="title" class="small-text-box"></textarea></p>
                 <p>Enter Poem Here<br><textarea class="large-text-box" name="poem"></textarea></p>
                 <p>Enter name of author here<br><input name="author"></p>
                 <input type="submit">
@@ -69,6 +66,11 @@
          </div>
          <!--WRITE POEM END-->
     </div>
+    <footer class="pt-5 my-5 text-muted border-top">
+        <div class="container text-center intro-page read-poem write-poem">
+            <p>Created by Will Farmer &middot; 2023</p>
+        </div>
+    </footer>
     
 
 

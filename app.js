@@ -1,45 +1,52 @@
 const express = require('express');
 const app = express();
+const fs = require('fs');
 
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'client')));
-
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
-const fs = require('fs');
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.post('/save-json', (req, res) => {
   // Read the JSON data from the request body
   const jsonData = req.body;
-  const data = {};
-  //poem is key author is value - each poem is unique. 
-  data[jsonData.poem] = jsonData.author;
-  // Set destination file
+
+  // Read existing JSON file
   const filePath = './poems.json';
-  /*ADAPTED FROM CHATGPT*/
-  fs.readFile(filePath, 'utf8', (err, fileData) =>{
-    //use of utf8 so string not buffer
+  fs.readFile(filePath, 'utf8', (err, fileData) => {
     if (err) {
-        console.error(err) //record error + appropriate status code
-        res.status(500).send('Error reading the file.');
-    } else {
-        let jsonFile = {};
-        if (fileData) {
-            jsonFile = JSON.parse(fileData);
-        }
-        Object.assign(jsonFile, data);
-        //adds data to dictionary, overwrites old
-        fs.writeFile(filePath, JSON.stringify(jsonFile), (err) => {
-            if (err) {
-                console.error(err);
-                res.status(500).send('Error saving the file.')
-            } else {
-                res.status(200).send('File saved successfully.');
-            }
-        })
+      console.error(err);
+      res.status(500).send('Error reading the file.');
+      return;
     }
-  })
-  
+
+    let jsonFile = {};
+    if (fileData) {
+      jsonFile = JSON.parse(fileData);
+    }
+
+    // Check if author already exists in jsonFile
+    if (!jsonFile[jsonData.author]) {
+      // If author does not exist, create a new key-value pair with author as the key
+      jsonFile[jsonData.author] = [];
+    }
+
+    // Add the new poem to the author's array of poems
+    jsonFile[jsonData.author].push({ title: jsonData.title, poem: jsonData.poem });
+
+    // Write the updated jsonFile back to the JSON file
+    fs.writeFile(filePath, JSON.stringify(jsonFile), (err) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error saving the file.');
+      } else {
+        res.status(200).send('File saved successfully.');
+      }
+    });
   });
+});
+
 
 app.get('/poems', (req, res) => {
     // Read the file as a JSON object
