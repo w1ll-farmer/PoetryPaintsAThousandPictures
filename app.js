@@ -47,7 +47,6 @@ app.post('/save-json', (req, res) => {
   });
 });
 
-
 app.get('/poems', (req, res) => {
     // Read the file as a JSON object
     fs.readFile('./poems.json', 'utf8', (err, data) => {
@@ -57,20 +56,17 @@ app.get('/poems', (req, res) => {
         }
         // Parse the JSON data
         const poems = JSON.parse(data);
-        let newPoems ={}
-        let temp ={}
-        for (let poem in poems) {
-            let newPoem = poem.replace(/\\n/g, '\n');
-            temp[newPoem] = poems[poem];
-            Object.assign(newPoems,temp)
-        }
-        // Send the poems data as a JSON response
+        const newPoems = {};
+        for (const author in poems) {
+            const newPoemsArr = [];
+            for (let i = 0; i < poems[author].length; i++) {
+            newPoemsArr.push({ title: poems[author][i].title, poem: poems[author][i].poem.replace(/\n/g, '\n') });
+            }
+            newPoems[author] = newPoemsArr;
+            }
+            // Send the poems data as a JSON response
         res.json(newPoems);
     });
 });
-  
-
-
-
 
 module.exports = app;
