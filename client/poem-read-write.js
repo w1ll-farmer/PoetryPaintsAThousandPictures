@@ -1,14 +1,14 @@
-async function saveData() {
+async function saveData () {
   // Assigns poem, author and title to variables
   const poem = document.querySelector("textarea[name='poem']").value;
   const author = document.querySelector("input[name='author']").value;
   const title = document.querySelector("textarea[name='title']").value;
 
   // Create a data object to hold the form data
-  const data = { 
-      author: author, 
-      title: title, 
-      poem: poem 
+  const data = {
+      author,
+      title,
+      poem
   };
 
   // Convert the data object to a string using stringify()
@@ -30,51 +30,55 @@ async function saveData() {
   }
 }
 
-
-
-  
-  const form = document.querySelector("#write-form");
-  form.addEventListener("submit", x => {
-    x.preventDefault(); //makes sure page doesn't reload
-    saveData(); //calls function to write + save data
-    document.getElementById("write-form").reset(); 
-    //resets the form so data doesn't remain inside
+  const form = document.querySelector('#write-form');
+  form.addEventListener('submit', x => {
+    x.preventDefault(); // makes sure page doesn't reload
+    saveData(); // calls function to write + save data
+    document.getElementById('write-form').reset();
+    // resets the form so data doesn't remain inside
   });
   let previousPoemDiv = null;
   let previousPoem = null;
-  async function getPoem() {
+  // let previousAuthor = null;
+  async function getPoem () {
     try {
-        const response = await fetch('/poems');
-        const poemDict = await response.json();
-        const poemDiv = document.getElementById("poems");
-        const keys = Object.keys(poemDict);
-        let randomPoem=previousPoem
-        while (randomPoem == previousPoem){
-            const randomIndex = Math.floor(Math.random() * keys.length);
-            randomPoem = keys[randomIndex];
-        }
-        previousPoem = randomPoem
-        const author = poemDict[randomPoem];
-        let poemNode = document.createElement("div");
-        poemNode.setAttribute("id", "poem-node")
-        let formattedPoem = randomPoem.replace(/\\n/g, '<br>');
-        let poemContent = `<textarea readonly style="height:300px;width:475px;resize:none;font-size:11pt;font-style:italic;font-family:Arial,san-serif;background-color: rgba(255, 255, 255, 0.5);">${formattedPoem}</textarea><p><span style="font-weight:bold">Author:</span> ${author}</p>`;
-        poemNode.innerHTML = poemContent;
-        poemDiv.appendChild(poemNode);
-        if (previousPoemDiv) {
-            previousPoemDiv.style.display = "none";
-        }
-        previousPoemDiv = poemNode;
+      const response = await fetch('/poems');
+      const poemDict = await response.json();
+      const poemDiv = document.getElementById('poems');
+      const authors = Object.keys(poemDict);
+      const randomIndex = Math.floor(Math.random() * authors.length);
+      const randomAuthor = authors[randomIndex];
+      // const previousAuthor = randomAuthor;
+      const poemArray = poemDict[randomAuthor];
+      let randomPoem = previousPoem;
+      // eslint-disable-next-line eqeqeq
+      while (randomPoem == previousPoem) {
+          const randomIndex = Math.floor(Math.random() * poemArray.length);
+          randomPoem = poemArray[randomIndex];
+      }
+      previousPoem = randomPoem;
+      const title = randomPoem.title;
+      const poem = randomPoem.poem;
+      const poemNode = document.createElement('div');
+      poemNode.setAttribute('id', 'poem-node');
+      const formattedPoem = poem.replace(/\\n/g, '<br>');
+      const poemContent = `<textarea readonly style="height:30px;width:200px;resize:none;font-size:12pt; background-color:rgba(255,255,255,0.5);text-align:center">${title}</textarea><br><textarea readonly style="height:300px;width:475px;resize:none;font-size:11pt;font-style:italic;font-family:Arial,san-serif;background-color: rgba(255, 255, 255, 0.5);">${formattedPoem}</textarea><p><span style="font-weight:bold">Author:</span> ${randomAuthor}</p>`;
+      poemNode.innerHTML = poemContent;
+      poemDiv.appendChild(poemNode);
+      if (previousPoemDiv) {
+          previousPoemDiv.style.display = 'none';
+      }
+      previousPoemDiv = poemNode;
     } catch (err) {
-        console.error(err);
+      console.error(err);
     }
-}
+  }
 
-window.addEventListener("DOMContentLoaded", function() {
-    const poemGenButton = document.getElementById("poem-gen");
-    poemGenButton.addEventListener("click", function(){
+window.addEventListener('DOMContentLoaded', function () {
+    const poemGenButton = document.getElementById('poem-gen');
+    poemGenButton.addEventListener('click', function () {
         getPoem();
     });
 });
 
-//let poemContent = `<textarea style="height:20vh;width:30vw;resize:none;font-size:12pt;font-style:italic;font-family:Arial,san-serif">${formattedPoem}</textarea><p>Author: ${author}</p><br><br>`;
+// let poemContent = `<textarea style="height:20vh;width:30vw;resize:none;font-size:12pt;font-style:italic;font-family:Arial,san-serif">${formattedPoem}</textarea><p>Author: ${author}</p><br><br>`;
