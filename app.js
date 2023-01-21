@@ -69,4 +69,10 @@ app.get('/poems', (req, res) => {
     });
 });
 
+const poemsFromFile = require('./poems.json');
+app.get('/authors', function (req, resp) {
+    const authors = Object.keys(poemsFromFile);
+    resp.send(authors);
+});
+
 module.exports = app;
