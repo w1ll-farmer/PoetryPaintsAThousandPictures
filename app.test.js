@@ -23,6 +23,8 @@ describe('Test the poems service', () => {
         .get('/poems')
         .expect(/Her/);
     });
+});
+describe('Test reading authors and poems', () => {
     test('POST /save-json', () => {
         const jsonData = { author: 'Michele Meleen', title: 'Behold my Breath', poem: "In and out,\nfast or slow,\nI feel my breath,\nbut can't see it go\nWhen winter arrives\nmy breath comes alive\nIn and out,\nfast or slow,\nin the cold winter air,\nmy breath is there to behold." };
         return request(app)

@@ -1,5 +1,5 @@
 async function saveData () {
-  // Assigns poem, author and title to variables
+  // Assigns poem, author and title to constants
   const poem = document.querySelector("textarea[name='poem']").value;
   const author = document.querySelector("input[name='author']").value;
   const title = document.querySelector("textarea[name='title']").value;
@@ -39,20 +39,20 @@ async function saveData () {
   });
   let previousPoemDiv = null;
   let previousPoem = null;
-  // let previousAuthor = null;
   async function getPoem () {
     try {
-      const response = await fetch('/poems');
+      const response = await fetch('/poems'); // makes get request
       const poemDict = await response.json();
       const poemDiv = document.getElementById('poems');
-      const authors = Object.keys(poemDict);
+      const authors = Object.keys(poemDict); // extracts authors
+      // generates random author
       const randomIndex = Math.floor(Math.random() * authors.length);
       const randomAuthor = authors[randomIndex];
       // const previousAuthor = randomAuthor;
       const poemArray = poemDict[randomAuthor];
       let randomPoem = previousPoem;
       // eslint-disable-next-line eqeqeq
-      while (randomPoem == previousPoem) {
+      while (randomPoem == previousPoem) { // generates random poem
           const randomIndex = Math.floor(Math.random() * poemArray.length);
           randomPoem = poemArray[randomIndex];
       }
@@ -61,7 +61,7 @@ async function saveData () {
       const poem = randomPoem.poem;
       const poemNode = document.createElement('div');
       poemNode.setAttribute('id', 'poem-node');
-      const formattedPoem = poem.replace(/\\n/g, '<br>');
+      const formattedPoem = poem.replace(/\\n/g, '<br>'); // maintain newline
       const poemContent = `<textarea readonly style="height:30px;width:200px;resize:none;font-size:12pt; background-color:rgba(255,255,255,0.5);text-align:center">${title}</textarea><br><textarea readonly style="height:300px;width:475px;resize:none;font-size:11pt;font-style:italic;font-family:Arial,san-serif;background-color: rgba(255, 255, 255, 0.5);">${formattedPoem}</textarea><p><span style="font-weight:bold">Author:</span> ${randomAuthor}</p>`;
       poemNode.innerHTML = poemContent;
       poemDiv.appendChild(poemNode);
@@ -80,5 +80,3 @@ window.addEventListener('DOMContentLoaded', function () {
         getPoem();
     });
 });
-
-// let poemContent = `<textarea style="height:20vh;width:30vw;resize:none;font-size:12pt;font-style:italic;font-family:Arial,san-serif">${formattedPoem}</textarea><p>Author: ${author}</p><br><br>`;
