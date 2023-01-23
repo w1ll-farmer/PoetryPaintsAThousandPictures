@@ -44,4 +44,9 @@ describe('Test the authors service', () => {
         .get('/authors')
         .expect(/Will Farmer/);
     });
+    test('/GET authors returns JSON', () => {
+        return request(app)
+        .get('/authors')
+        .expect('Content-type', /json/);
+    });
 });
