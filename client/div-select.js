@@ -44,6 +44,7 @@ function showModal () {
           // display modal
           showModal();
       });
+      setTimeout(checkServer, 3000);
     }
 window.addEventListener('DOMContentLoaded', function () {
     checkServer();
